@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var bodyParser = require('body-parser');
-var localStrategy = require('passport-local');
+var LocalStrategy = require('passport-local');
 var passportLocalMongoose = require('passport-local-mongoose');
 var User = require('./models/user');
 
@@ -54,25 +54,25 @@ app.post('/register', function(req, res){
   })
 });
 
-app.get('/login',function(req, res){
-  res.render()
+app.get("/login",function(req, res){
+  res.render("login");
 });
 
-app.post('login', passport.authenticate("local", {
-  successRedirect: '/secret',
-  failureRedirect: '/login'
+app.post("/login", passport.authenticate("local", {
+  successRedirect: "/secret",
+  failureRedirect: "/login"
 }),function(req, res){
 });
 
 app.get('/logout', function(req, res){
-  req.logut();
+  req.logout();
   res.redirect("/");
 });
 
 function isLoggedIn(req, res, next){
-  if(req.isAuthenticated(){
+  if(req.isAuthenticated()){
     return next();
-  });
+  };
   res.redirect("/login");
 }
 
